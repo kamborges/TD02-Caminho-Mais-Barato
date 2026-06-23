@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Caminho Mais Barato</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Caminho Mais Barato</h1>
+
+        <span class="subtitulo">
+            Teoria de Grafos
+        </span>
+
+        <p>
+            Encontre a rota de menor custo entre capitais brasileiras considerando
+            distância, combustível, autonomia e pedágios.
+        </p>
+
+        <section class="card">
+
+            <div class="grupo">
+                <label for="origem">Capital de origem</label>
+                <select id="origem"></select>
+            </div>
+
+            <div class="grupo">
+                <label for="destino">Capital de destino</label>
+                <select id="destino"></select>
+            </div>
+
+            <div class="grupo">
+                <label for="preco">Preço do combustível (R$)</label>
+                <input type="number" id="preco" placeholder="Ex: 6.00" step="0.01">
+            </div>
+
+            <div class="grupo">
+                <label for="autonomia">Autonomia (Km/L)</label>
+                <input type="number" id="autonomia" placeholder="Ex: 10" step="0.1">
+            </div>
+
+            <button onclick="buscarCaminho()">
+                Calcular Caminho
+            </button>
+
+        </section>
+
+        <section id="resultado" class="resultado"></section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
