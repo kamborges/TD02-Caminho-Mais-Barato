@@ -133,7 +133,9 @@ class Grafo {
             anteriores[capital] = null;
         }
 
-        custos[origem] = this.vertices[origem].toll;
+        // O custo inicial da origem é zero: não se paga pedágio nem na
+        // origem, nem no destino final — só nas capitais de passagem.
+        custos[origem] = 0;
         heap.inserir({ capital: origem, custo: custos[origem] });
 
         while (!heap.estaVazio()) {
@@ -147,8 +149,11 @@ class Grafo {
             for (const vizinho in vizinhos) {
                 const distancia = vizinhos[vizinho];
 
+                // O pedágio só é cobrado das capitais de PASSAGEM.
+                // Se o vizinho for o destino final, não se paga pedágio nele
+                // (só se paga pedágio de quem fica no meio do caminho).
                 const custoCombustivel = (distancia / autonomia) * precoCombustivel;
-                const custoPedagio = this.vertices[vizinho].toll;
+                const custoPedagio = (vizinho === destino) ? 0 : this.vertices[vizinho].toll;
                 const novoCusto = custos[capitalAtual] + custoCombustivel + custoPedagio;
 
                 if (novoCusto < custos[vizinho]) {
@@ -187,7 +192,11 @@ grafo.seed(capitais);
 grafo.show();
 
 app.get("/capitais", (req, res) => {
-    res.json(Object.keys(grafo.vertices));
+    const listaOrdenada = Object.keys(grafo.vertices).sort((a, b) =>
+        a.localeCompare(b, "pt-BR")
+    );
+
+    res.json(listaOrdenada);
 });
 
 app.post("/buscar", (req, res) => {

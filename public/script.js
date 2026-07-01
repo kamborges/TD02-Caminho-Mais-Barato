@@ -1,3 +1,10 @@
+function formatarMoeda(valor) {
+  return Number(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
 async function carregarCapitais() {
   const resposta = await fetch("/capitais");
   const capitais = await resposta.json();
@@ -44,7 +51,7 @@ async function buscarCaminho() {
     <strong>Rota mais barata:</strong><br>
     ${dados.caminho.join(" → ")}
     <br><br>
-    <strong>Custo total:</strong> R$ ${dados.custoTotal}
+    <strong>Custo total:</strong> ${formatarMoeda(dados.custoTotal)}
   `;
 }
 
